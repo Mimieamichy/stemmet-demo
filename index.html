@@ -532,6 +532,394 @@
       padding-bottom: calc(72px + env(safe-area-inset-bottom));
     }
   }
+
+  /* ---------- testimonial carousel ---------- */
+  .carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 36px;
+  }
+  .carousel-container {
+    overflow: hidden;
+    width: 100%;
+    padding: 10px 0;
+  }
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+  }
+  .carousel-slide {
+    flex: 0 0 33.333%;
+    padding: 0 12px;
+    box-sizing: border-box;
+  }
+  .carousel-slide .log-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .carousel-slide .log-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(22, 40, 58, 0.08);
+  }
+  @media (max-width: 980px) {
+    .carousel-slide {
+      flex: 0 0 50%;
+    }
+  }
+  @media (max-width: 640px) {
+    .carousel-slide {
+      flex: 0 0 100%;
+    }
+  }
+  .carousel-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink);
+    box-shadow: 0 4px 12px rgba(22, 40, 58, 0.05);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .carousel-btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgba(22, 40, 58, 0.15);
+  }
+  .carousel-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  @media (max-width: 760px) {
+    .carousel-btn {
+      display: none;
+    }
+    .carousel-wrapper {
+      gap: 0;
+    }
+  }
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+  }
+  .carousel-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--line);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    padding: 0;
+    border: none;
+  }
+  .carousel-dots .dot:hover {
+    background: var(--ink-soft);
+  }
+  .carousel-dots .dot.active {
+    background: var(--teal);
+    transform: scale(1.15);
+    width: 22px;
+    border-radius: 100px;
+  }
+
+  /* ---------- sign-up glass modal ---------- */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(22, 40, 58, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    padding: 20px;
+  }
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal-container {
+    background: rgba(250, 248, 244, 0.72);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 30px 60px rgba(22, 40, 58, 0.16), 0 0 100px rgba(44, 140, 135, 0.08);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 580px;
+    padding: 36px;
+    position: relative;
+    transform: scale(0.92) translateY(20px);
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .modal-container::-webkit-scrollbar {
+    display: none;
+  }
+  .modal-overlay.open .modal-container {
+    transform: scale(1) translateY(0);
+  }
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(22, 40, 58, 0.06);
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+  .modal-close:hover {
+    background: var(--ink);
+    color: var(--white);
+    transform: rotate(90deg) scale(1.05);
+  }
+  .modal-close svg {
+    width: 15px;
+    height: 15px;
+  }
+  .modal-head {
+    margin-bottom: 28px;
+    padding-right: 24px;
+  }
+  .modal-head h2 {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 4vw, 30px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-top: 6px;
+    color: var(--ink);
+  }
+  .modal-head p {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    margin-top: 8px;
+  }
+  .modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 580px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .modal-container {
+      padding: 30px 20px 24px;
+    }
+  }
+  .form-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .floating-group {
+    position: relative;
+  }
+  .form-control {
+    width: 100%;
+    padding: 13px 16px;
+    border-radius: 12px;
+    border: 1.5px solid var(--line);
+    background: rgba(255, 255, 255, 0.45);
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .form-control:focus {
+    border-color: var(--teal);
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(44, 140, 135, 0.12);
+  }
+  .floating-group label {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-soft);
+    font-size: 14px;
+    pointer-events: none;
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .form-control:focus ~ label,
+  .form-control:not(:placeholder-shown) ~ label {
+    top: 0;
+    transform: translateY(-50%) scale(0.85);
+    background: var(--paper);
+    padding: 0 6px;
+    left: 10px;
+    color: var(--teal-dark);
+    font-weight: 600;
+  }
+  .select-wrapper {
+    position: relative;
+  }
+  .select-control {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 40px;
+    background: rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+  }
+  .select-arrow {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    color: var(--ink-soft);
+    pointer-events: none;
+    transition: transform 0.25s ease;
+  }
+  .select-control:focus ~ .select-arrow {
+    transform: translateY(-50%) rotate(180deg);
+    color: var(--teal);
+  }
+  .select-label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--ink-soft);
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  .btn-submit {
+    margin-top: 6px;
+    justify-content: center;
+    width: 100%;
+    padding: 15px;
+  }
+  .btn-submit svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .btn-submit:hover svg {
+    transform: translateX(4px);
+  }
+  .modal-success-wrap {
+    text-align: center;
+    padding: 16px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .modal-success-wrap h2 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    margin-top: 20px;
+    color: var(--ink);
+  }
+  .success-message {
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin-top: 10px;
+    line-height: 1.5;
+    max-width: 420px;
+  }
+  .success-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    opacity: 0.9;
+    margin-top: 14px;
+    line-height: 1.5;
+    max-width: 380px;
+    padding: 12px;
+    background: rgba(44, 140, 135, 0.06);
+    border-radius: 12px;
+    border: 1px dashed rgba(44, 140, 135, 0.2);
+    margin-bottom: 22px;
+  }
+  .success-icon-box {
+    width: 72px;
+    height: 72px;
+  }
+  .checkmark-svg {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 3;
+    stroke: var(--teal);
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px var(--teal);
+    animation: fillCheckmark .4s ease-in-out .4s forwards, scaleCheckmark .3s ease-in-out .9s both;
+  }
+  .checkmark-circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 3;
+    stroke-miterlimit: 10;
+    stroke: var(--teal);
+    fill: none;
+    animation: strokeCircle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  }
+  .checkmark-check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: strokeCheck 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+  }
+  @keyframes strokeCircle {
+    100% { stroke-dashoffset: 0; }
+  }
+  @keyframes strokeCheck {
+    100% { stroke-dashoffset: 0; }
+  }
+  @keyframes fillCheckmark {
+    100% { box-shadow: inset 0px 0px 0px 40px rgba(44, 140, 135, 0.08); }
+  }
+  @keyframes scaleCheckmark {
+    0%, 100% { transform: none; }
+    50% { transform: scale3d(1.1, 1.1, 1); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 </style>
 </head>
 <body>
@@ -731,31 +1119,83 @@
         <h2>What families tell us after the last mission.</h2>
         <p>Every camp is built around "missions",  launching a launcher, establishing communication, generating power. Here's how they went.</p>
       </div>
-      <div class="log-grid">
-        <div class="log-card">
-          <div class="log-top">
-            <span class="log-id">LOG // 0114</span>
-            <div class="log-avatar" style="background:var(--maroon)">TA</div>
+      
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev-btn" id="carouselPrev" aria-label="Previous testimonial">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        
+        <div class="carousel-container">
+          <div class="carousel-track" id="testimonialTrack">
+            <!-- Testimonial 1 -->
+            <div class="carousel-slide">
+              <div class="log-card">
+                <div class="log-top">
+                  <span class="log-id">LOG // 0114</span>
+                  <div class="log-avatar" style="background:var(--maroon)">TA</div>
+                </div>
+                <p class="quote">"My son waited for the next mission before we'd even finished the first — Launching the Launcher, then Generating Power. He didn't want to leave."</p>
+                <p class="log-name">Tayo A. — parent, Lekki</p>
+              </div>
+            </div>
+            <!-- Testimonial 2 -->
+            <div class="carousel-slide">
+              <div class="log-card">
+                <div class="log-top">
+                  <span class="log-id">LOG // 0119</span>
+                  <div class="log-avatar" style="background:var(--teal)">IB</div>
+                </div>
+                <p class="quote">"I wish we'd had more time on the course, I kept wanting another map to try before it was someone else's turn."</p>
+                <p class="log-name">Ibraheem B. — student, age 11</p>
+              </div>
+            </div>
+            <!-- Testimonial 3 -->
+            <div class="carousel-slide">
+              <div class="log-card">
+                <div class="log-top">
+                  <span class="log-id">LOG // 0127</span>
+                  <div class="log-avatar" style="background:var(--brown)">CN</div>
+                </div>
+                <p class="quote">"The team ran the whole workshop at our school without a hitch. Every phase was handled properly, the kids are still talking about it."</p>
+                <p class="log-name">Mrs. C. Nnamdi — school coordinator, Ibadan</p>
+              </div>
+            </div>
+            <!-- Testimonial 4 -->
+            <div class="carousel-slide">
+              <div class="log-card">
+                <div class="log-top">
+                  <span class="log-id">LOG // 0132</span>
+                  <div class="log-avatar" style="background:var(--teal-dark)">CO</div>
+                </div>
+                <p class="quote">"The online classes were a lifesaver. We were worried about screen time, but they were coding and building the whole time."</p>
+                <p class="log-name">Chioma O. — parent, Ikeja</p>
+              </div>
+            </div>
+            <!-- Testimonial 5 -->
+            <div class="carousel-slide">
+              <div class="log-card">
+                <div class="log-top">
+                  <span class="log-id">LOG // 0145</span>
+                  <div class="log-avatar" style="background:var(--ink)">YD</div>
+                </div>
+                <p class="quote">"Building the sensors was my favorite part. I want to build a smart door next that opens when I say the password."</p>
+                <p class="log-name">Yusuf D. — student, age 9</p>
+              </div>
+            </div>
           </div>
-          <p class="quote">"My son waited for the next mission before we'd even finished the first — Launching the Launcher, then Generating Power. He didn't want to leave."</p>
-          <p class="log-name">Tayo A. — parent, Lekki</p>
         </div>
-        <div class="log-card">
-          <div class="log-top">
-            <span class="log-id">LOG // 0119</span>
-            <div class="log-avatar" style="background:var(--teal)">IB</div>
-          </div>
-          <p class="quote">"I wish we'd had more time on the course, I kept wanting another map to try before it was someone else's turn."</p>
-          <p class="log-name">Ibraheem B. — student, age 11</p>
-        </div>
-        <div class="log-card">
-          <div class="log-top">
-            <span class="log-id">LOG // 0127</span>
-            <div class="log-avatar" style="background:var(--brown)">CN</div>
-          </div>
-          <p class="quote">"The team ran the whole workshop at our school without a hitch. Every phase was handled properly, the kids are still talking about it."</p>
-          <p class="log-name">Mrs. C. Nnamdi — school coordinator, Ibadan</p>
-        </div>
+        
+        <button class="carousel-btn next-btn" id="carouselNext" aria-label="Next testimonial">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="carousel-dots" id="carouselDots">
+        <!-- Dots will be dynamically generated by JS -->
       </div>
     </div>
   </section>
@@ -921,6 +1361,112 @@
   </a>
 </nav>
 
+<!-- SIGN-UP GLASS MODAL -->
+<div class="modal-overlay" id="signUpModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+  <div class="modal-container">
+    <button class="modal-close" id="closeModalBtn" aria-label="Close modal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    
+    <!-- Modal content (Initial State: Form) -->
+    <div class="modal-content-wrap" id="modalFormContent">
+      <div class="modal-head">
+        <span class="eyebrow" style="color:var(--teal)">Start the adventure</span>
+        <h2 id="modalTitle">Join the Next STEM Mission</h2>
+        <p>Book a free trial class or register your child for an upcoming camp across our learning centers.</p>
+      </div>
+      
+      <form class="modal-form" id="signUpForm">
+        <div class="form-row">
+          <div class="form-group floating-group">
+            <input type="text" id="parentName" class="form-control" placeholder=" " required autocomplete="name">
+            <label for="parentName">Parent's Full Name</label>
+          </div>
+        </div>
+        
+        <div class="form-grid">
+          <div class="form-group floating-group">
+            <input type="email" id="parentEmail" class="form-control" placeholder=" " required autocomplete="email">
+            <label for="parentEmail">Email Address</label>
+          </div>
+          <div class="form-group floating-group">
+            <input type="tel" id="parentPhone" class="form-control" placeholder=" " required autocomplete="tel" pattern="[0-9+\s\-]{8,15}">
+            <label for="parentPhone">Phone Number</label>
+          </div>
+        </div>
+        
+        <div class="form-grid">
+          <div class="form-group floating-group">
+            <input type="text" id="childName" class="form-control" placeholder=" " required>
+            <label for="childName">Child's Name</label>
+          </div>
+          <div class="form-group floating-group">
+            <input type="number" id="childAge" class="form-control" min="3" max="15" placeholder=" " required>
+            <label for="childAge">Child's Age</label>
+          </div>
+        </div>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="select-label">Preferred City</label>
+            <div class="select-wrapper">
+              <select id="preferredCity" class="form-control select-control" required>
+                <option value="" disabled selected hidden>Select a city</option>
+                <option value="Lagos">Lagos (Lekki HQ)</option>
+                <option value="Abuja">Abuja</option>
+                <option value="Ibadan">Ibadan</option>
+                <option value="Port Harcourt">Port Harcourt</option>
+                <option value="Calabar">Calabar</option>
+                <option value="Ilorin">Ilorin</option>
+                <option value="Online">Online / Virtual Camp</option>
+              </select>
+              <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="select-label">Program Interest</label>
+            <div class="select-wrapper">
+              <select id="programInterest" class="form-control select-control" required>
+                <option value="" disabled selected hidden>Select a program</option>
+                <option value="Science">S — Science (Ages 3-9)</option>
+                <option value="Technology">T — Technology (Ages 8-13)</option>
+                <option value="Engineering">E — Engineering (Ages 7-13)</option>
+                <option value="Math">M — Math (Ages 9-13)</option>
+              </select>
+              <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+          </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-submit">
+          <span>Confirm Registration</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </form>
+    </div>
+    
+    <!-- Success State Card -->
+    <div class="modal-success-wrap" id="modalSuccessContent" style="display: none;">
+      <div class="success-icon-box">
+        <svg class="checkmark-svg" viewBox="0 0 52 52">
+          <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+          <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
+      </div>
+      <h2>Mission Initialized!</h2>
+      <p class="success-message">Thank you for registering, <strong id="successParentName">Parent</strong>. We have logged your interest in the <strong id="successProgram">STEM</strong> program for <strong id="successChildName">Child</strong>.</p>
+      <p class="success-sub">A coordinator from our <strong id="successCity">City</strong> team will contact you at <strong id="successPhone">Phone</strong> within 24 hours with details for the upcoming session.</p>
+      <button class="btn btn-primary" id="successCloseBtn" style="justify-content: center; width: 100%;">Awesome, thanks!</button>
+    </div>
+  </div>
+</div>
+
 <script>
   // badge interactivity
   const subjectData = {
@@ -983,6 +1529,289 @@
       navItems.forEach(x => x.classList.remove('active'));
       item.classList.add('active');
     });
+  });
+
+  // ---------- TESTIMONIAL CAROUSEL LOGIC ----------
+  const track = document.getElementById('testimonialTrack');
+  const slides = Array.from(track.children);
+  const nextBtn = document.getElementById('carouselNext');
+  const prevBtn = document.getElementById('carouselPrev');
+  const dotsContainer = document.getElementById('carouselDots');
+  
+  let activeSlideIndex = 0;
+  let autoplayTimer = null;
+  const totalSlides = slides.length;
+
+  function getSlidesPerPage() {
+    if (window.innerWidth > 980) return 3;
+    if (window.innerWidth > 640) return 2;
+    return 1;
+  }
+
+  function getMaxScrollIndex() {
+    return totalSlides - getSlidesPerPage();
+  }
+
+  function updateCarousel() {
+    const slidesPerPage = getSlidesPerPage();
+    const maxIndex = getMaxScrollIndex();
+    
+    // Boundary check
+    if (activeSlideIndex > maxIndex) activeSlideIndex = maxIndex;
+    if (activeSlideIndex < 0) activeSlideIndex = 0;
+
+    // Apply transform translation
+    const slideOffset = activeSlideIndex * (100 / slidesPerPage);
+    track.style.transform = `translateX(-${slideOffset}%)`;
+
+    // Update active dot
+    const dots = Array.from(dotsContainer.children);
+    dots.forEach((dot, idx) => {
+      if (idx === activeSlideIndex) {
+        dot.classList.add('active');
+        dot.setAttribute('aria-pressed', 'true');
+      } else {
+        dot.classList.remove('active');
+        dot.setAttribute('aria-pressed', 'false');
+      }
+    });
+
+    // Disable/Enable buttons if at boundaries
+    prevBtn.style.opacity = activeSlideIndex === 0 ? '0.3' : '1';
+    prevBtn.style.pointerEvents = activeSlideIndex === 0 ? 'none' : 'auto';
+    nextBtn.style.opacity = activeSlideIndex === maxIndex ? '0.3' : '1';
+    nextBtn.style.pointerEvents = activeSlideIndex === maxIndex ? 'none' : 'auto';
+  }
+
+  function initDots() {
+    dotsContainer.innerHTML = '';
+    const maxIndex = getMaxScrollIndex();
+    for (let i = 0; i <= maxIndex; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'dot';
+      dot.setAttribute('data-index', i);
+      dot.setAttribute('aria-label', `Go to testimonial slide ${i + 1}`);
+      dot.addEventListener('click', () => {
+        activeSlideIndex = i;
+        updateCarousel();
+        resetAutoplay();
+      });
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  // Navigation handlers
+  nextBtn.addEventListener('click', () => {
+    const maxIndex = getMaxScrollIndex();
+    if (activeSlideIndex < maxIndex) {
+      activeSlideIndex++;
+    } else {
+      activeSlideIndex = 0; // Wrap around
+    }
+    updateCarousel();
+    resetAutoplay();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    const maxIndex = getMaxScrollIndex();
+    if (activeSlideIndex > 0) {
+      activeSlideIndex--;
+    } else {
+      activeSlideIndex = maxIndex; // Wrap around to end
+    }
+    updateCarousel();
+    resetAutoplay();
+  });
+
+  // Autoplay functionality
+  function startAutoplay() {
+    autoplayTimer = setInterval(() => {
+      const maxIndex = getMaxScrollIndex();
+      if (activeSlideIndex < maxIndex) {
+        activeSlideIndex++;
+      } else {
+        activeSlideIndex = 0;
+      }
+      updateCarousel();
+    }, 5000);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  function resetAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  // Pause on hover
+  const carouselWrapper = document.querySelector('.carousel-wrapper');
+  carouselWrapper.addEventListener('mouseenter', stopAutoplay);
+  carouselWrapper.addEventListener('mouseleave', startAutoplay);
+
+  // Swipe gesture support for mobile
+  let touchstartX = 0;
+  let touchendX = 0;
+
+  carouselWrapper.addEventListener('touchstart', (e) => {
+    touchstartX = e.changedTouches[0].screenX;
+    stopAutoplay();
+  }, { passive: true });
+
+  carouselWrapper.addEventListener('touchend', (e) => {
+    touchendX = e.changedTouches[0].screenX;
+    handleSwipe();
+    startAutoplay();
+  }, { passive: true });
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const maxIndex = getMaxScrollIndex();
+    
+    if (touchstartX - touchendX > swipeThreshold) {
+      // Swipe left -> next slide
+      if (activeSlideIndex < maxIndex) {
+        activeSlideIndex++;
+      } else {
+        activeSlideIndex = 0;
+      }
+      updateCarousel();
+    } else if (touchendX - touchstartX > swipeThreshold) {
+      // Swipe right -> prev slide
+      if (activeSlideIndex > 0) {
+        activeSlideIndex--;
+      } else {
+        activeSlideIndex = maxIndex;
+      }
+      updateCarousel();
+    }
+  }
+
+  // Handle window resize dynamically to adjust columns
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      initDots();
+      updateCarousel();
+    }, 150);
+  });
+
+  // Initial call
+  initDots();
+  updateCarousel();
+  startAutoplay();
+
+
+  // ---------- GLASS MODAL LOGIC ----------
+  const modal = document.getElementById('signUpModal');
+  const openModalBtns = document.querySelectorAll('a[href="#cta"]');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const successCloseBtn = document.getElementById('successCloseBtn');
+  const form = document.getElementById('signUpForm');
+  const formContent = document.getElementById('modalFormContent');
+  const successContent = document.getElementById('modalSuccessContent');
+
+  function openModal() {
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    
+    // Focus first input
+    setTimeout(() => {
+      document.getElementById('parentName').focus();
+    }, 100);
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    
+    // Reset form states after close animation completes
+    setTimeout(() => {
+      form.reset();
+      formContent.style.display = 'block';
+      successContent.style.display = 'none';
+      
+      // Reset input custom placeholder values
+      const controls = form.querySelectorAll('.form-control');
+      controls.forEach(control => {
+        control.blur();
+      });
+    }, 450);
+  }
+
+  // Attach click listeners to CTA links
+  openModalBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      // Check if button is email/tel or actual page section scroll
+      const href = btn.getAttribute('href');
+      if (href === '#cta') {
+        e.preventDefault();
+        openModal();
+      }
+    });
+  });
+
+  closeModalBtn.addEventListener('click', closeModal);
+  successCloseBtn.addEventListener('click', closeModal);
+
+  // Close on click outside the container
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Close on Escape key press
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) {
+      closeModal();
+    }
+  });
+
+  // Handle Form Submission
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const parentNameVal = document.getElementById('parentName').value;
+    const parentEmailVal = document.getElementById('parentEmail').value;
+    const parentPhoneVal = document.getElementById('parentPhone').value;
+    const childNameVal = document.getElementById('childName').value;
+    const childAgeVal = document.getElementById('childAge').value;
+    const preferredCityVal = document.getElementById('preferredCity').value;
+    const programInterestVal = document.getElementById('programInterest').value;
+
+    // Simulate network latency / loading animation
+    const submitBtn = form.querySelector('.btn-submit');
+    const originalText = submitBtn.querySelector('span').textContent;
+    submitBtn.disabled = true;
+    submitBtn.querySelector('span').textContent = 'Launching Mission...';
+    
+    setTimeout(() => {
+      // Re-enable button
+      submitBtn.disabled = false;
+      submitBtn.querySelector('span').textContent = originalText;
+
+      // Populate Success details
+      document.getElementById('successParentName').textContent = parentNameVal.split(' ')[0];
+      document.getElementById('successProgram').textContent = programInterestVal;
+      document.getElementById('successChildName').textContent = childNameVal;
+      document.getElementById('successCity').textContent = preferredCityVal;
+      document.getElementById('successPhone').textContent = parentPhoneVal;
+
+      // Transition views
+      formContent.style.display = 'none';
+      successContent.style.display = 'flex';
+      
+      // Focus success button
+      successCloseBtn.focus();
+    }, 1200);
   });
 </script>
 
