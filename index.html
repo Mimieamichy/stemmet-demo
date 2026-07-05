@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STEM METS — Science, Tech, Engineering &amp; Math for Nigerian Kids</title>
+<title>STEM METS: Science, Tech, Engineering &amp; Math for Nigerian Kids</title>
 <link rel="icon" type="image/png" href="stemmetsLogo2.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -920,11 +920,143 @@
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  /* ---------- announcement banner ---------- */
+  .announcement-banner {
+    background: linear-gradient(90deg, var(--teal-dark) 0%, var(--teal) 100%);
+    color: var(--white);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    z-index: 101;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .announcement-banner.hidden {
+    display: none;
+  }
+  .announcement-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding-right: 24px; /* space for close button */
+  }
+  .announcement-tag {
+    background: var(--maroon);
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .announcement-link {
+    font-weight: 600;
+    text-decoration: underline;
+    transition: opacity 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+  }
+  .announcement-link:hover {
+    opacity: 0.9;
+  }
+  .announcement-close {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--white);
+    opacity: 0.8;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .announcement-close:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+  }
+  .announcement-close svg {
+    width: 14px;
+    height: 14px;
+  }
+  @media (max-width: 760px) {
+    .announcement-banner {
+      padding: 8px 40px 8px 16px;
+      overflow: hidden;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .announcement-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      padding-right: 0;
+      animation: banner-scroll 18s linear infinite;
+      will-change: transform;
+    }
+    .announcement-content:hover {
+      animation-play-state: paused;
+    }
+    .announcement-close {
+      right: 0;
+      top: 0;
+      bottom: 0;
+      transform: none;
+      height: 100%;
+      width: 44px;
+      background: linear-gradient(90deg, transparent 0%, var(--teal) 60%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 12px;
+      z-index: 102;
+    }
+    .announcement-close:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes banner-scroll {
+    0% {
+      transform: translateX(100vw);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
 </style>
 </head>
 <body>
 
 <header>
+  <!-- Announcement Banner -->
+  <div class="announcement-banner" id="announcementBanner">
+    <div class="announcement-content">
+      <span class="announcement-tag">NEW</span>
+      <span>August STEM camps are open for registration in Lagos, Abuja & Online!</span>
+      <a href="#cta" class="announcement-link">Book a Class Now &rarr;</a>
+    </div>
+    <button class="announcement-close" id="closeBannerBtn" aria-label="Close announcement">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
   <nav class="nav">
     <a href="#top" class="logo">
       <img src="stemmetsLogo2.png" alt="STEM METS Logo" class="logo-img">
@@ -1813,6 +1945,16 @@
       successCloseBtn.focus();
     }, 1200);
   });
+
+  // Announcement banner close handler
+  const banner = document.getElementById('announcementBanner');
+  const closeBannerBtn = document.getElementById('closeBannerBtn');
+  
+  if (banner && closeBannerBtn) {
+    closeBannerBtn.addEventListener('click', () => {
+      banner.classList.add('hidden');
+    });
+  }
 </script>
 
 </body>
