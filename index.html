@@ -42,7 +42,7 @@
   ::selection{background:var(--teal); color:var(--white);}
 
   @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+    *:not(.marquee-track){animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
   }
 
   /* ---------- utility ---------- */
@@ -207,13 +207,17 @@
     background:var(--ink); color:var(--paper);
     overflow:hidden; padding:16px 0;
   }
-  .marquee-track{display:flex; gap:0; width:max-content; animation:scroll 26s linear infinite;}
+  .marquee-track{
+    display:flex; gap:0; width:max-content;
+    will-change:transform;
+    -webkit-transform:translateZ(0);
+    transform:translateZ(0);
+  }
   .marquee-track span{
     font-family:var(--font-mono); font-size:14px; letter-spacing:.05em;
     padding:0 28px; white-space:nowrap; display:flex; align-items:center; gap:10px;
   }
   .marquee-track span::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--teal); display:inline-block;}
-  @keyframes scroll{from{transform:translateX(0);} to{transform:translateX(-50%);}}
 
   /* ---------- programs ---------- */
   .program-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
