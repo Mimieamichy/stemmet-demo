@@ -207,11 +207,15 @@
     background:var(--ink); color:var(--paper);
     overflow:hidden; padding:16px 0;
   }
+  @keyframes scroll-left{
+    0%  { transform: translateX(0); }
+    100%{ transform: translateX(-50%); }
+  }
   .marquee-track{
     display:flex; gap:0; width:max-content;
     will-change:transform;
-    -webkit-transform:translateZ(0);
-    transform:translateZ(0);
+    animation: scroll-left 18s linear infinite;
+    -webkit-animation: scroll-left 18s linear infinite;
   }
   .marquee-track span{
     font-family:var(--font-mono); font-size:14px; letter-spacing:.05em;
